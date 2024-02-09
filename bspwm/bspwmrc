@@ -1,0 +1,46 @@
+#! /bin/sh
+
+pgrep -x sxhkd >/dev/null || sxhkd &
+
+pkill dunst
+
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+
+bspc config window_gap 25
+bspc config top_padding 30
+bspc config left_padding 5
+bspc config right_padding 5
+bspc config bottom_padding 25
+
+current_theme=$(gsettings get org.gnome.desktop.interface gtk-theme)
+if [ "$current_theme" == "'Skeuos-Blue-Dark'" ]; then
+	bspc config border_width 2
+	bspc config normal_border_color "#272A34"
+	bspc config active_border_color "#3267C1"
+	bspc config focused_border_color "#3267C1"
+else
+	bspc config border_width 2
+	bspc config normal_border_color "#FAFAFA"
+	bspc config active_border_color "#367BF0"
+	bspc config focused_border_color "#367BF0"
+fi
+
+bspc config split_ratio 0.54
+bspc config borderless_monocle false
+bspc config gapless_monocle true
+bspc config automatic_scheme alternate
+bspc config initial_polarity second_child
+bspc config focus_follows_pointer true
+
+bspc rule -a Emacs state=tiled
+bspc rule -a zenity state=floating
+bspc rule -a Wrapper-2.0 state=floating
+bspc rule -a Pavucontrol state=floating
+bspc rule -a polybar state=floating
+bspc rule -a Polybar state=floating
+bspc rule -a gnome-calculator state=floating
+bspc rule -a Gpick state=floating
+
+xsetroot -cursor_name left_ptr
+
+$HOME/.config/bspwm/start.sh
