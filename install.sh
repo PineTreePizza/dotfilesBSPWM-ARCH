@@ -12,3 +12,9 @@ mv .gtkrc-2.0.mine $HOME/
 mv gtk-2.0/ $HOME/.config
 mv gtk-3.0 $HOME/.config
 mv gtk-4.0/ $HOME/.config
+
+mkdir /wallpapers/
+sudo cp ./Wallpapers/* /wallpapers
+sudo mv ./lightdm /etc
+
+cd ./bspwm/
